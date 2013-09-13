@@ -34,11 +34,6 @@ public class HomeScreen extends MainScreen implements FieldChangeListener {
         
     public HomeScreen()
 	{
-
-  //       addMenuItem( new RegisterMenuItem() );
- //       addMenuItem( new UnregisterMenuItem() );
- //       addMenuItem( new EnviarPush() );
- //       addMenuItem( new EliminarPersistencia() );
     	
     /**************************************************************************/
     	VerticalFieldManager pantalla = new VerticalFieldManager(Field.NON_FOCUSABLE | NO_VERTICAL_SCROLL);
@@ -69,7 +64,6 @@ public class HomeScreen extends MainScreen implements FieldChangeListener {
 		BitmapField bf = new BitmapField(BitmapManager.getInstance().getLogoAlcaldiaSucre() , FIELD_HCENTER | USE_ALL_WIDTH );
 		bf.setBackground(BackgroundFactory.createSolidBackground(0x00FCB53E));
 		bf.setPadding(10, 123, 5, 100);
-	//	bf.setPadding(0,0,0,0);
 		pantalla.add(bf);
 		pantalla.add(buttonSet);
 
@@ -83,9 +77,5 @@ public class HomeScreen extends MainScreen implements FieldChangeListener {
 		 if (field == listStyleButtonFieldDirectorio) { ScreenEngine.getInstance().goDirectorio(); }
 	}
 	
-	public void paintBackground (Graphics g) {
-		g.setColor(0xf1f1f1);
-		super.paintBackground(g);
-	}
 }
 
