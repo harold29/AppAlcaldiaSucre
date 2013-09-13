@@ -1,5 +1,6 @@
 package com.mobilemedia.AppAlcaldiaSucre;
 
+import com.mobilemedia.AppAlcaldiaSucre.engine.BitmapManager;
 import com.mobilemedia.AppAlcaldiaSucre.engine.ScreenEngine;
 
 import net.rim.device.api.system.EventLogger;
@@ -52,6 +53,7 @@ public class AppAlcaldiaSucre extends UiApplication
     }    
     
     public void showGui() {
+    	BitmapManager.getInstance().cagarImagenesMemoria();
     	ScreenEngine.getInstance().goHome();
     }
 }

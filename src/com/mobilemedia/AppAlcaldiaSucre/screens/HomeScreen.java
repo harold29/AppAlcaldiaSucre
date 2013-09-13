@@ -1,10 +1,10 @@
 package com.mobilemedia.AppAlcaldiaSucre.screens;
 
-import com.mobilemedia.AppAlcaldiaSucre.componentes.LabelFieldCustomColor;
-import com.mobilemedia.AppAlcaldiaSucre.componentes.ListStyleButtonField;
 import com.mobilemedia.AppAlcaldiaSucre.componentes.ListStyleButtonSet;
+import com.mobilemedia.AppAlcaldiaSucre.componentes.ListStyleButtonHome;
 import com.mobilemedia.AppAlcaldiaSucre.custom.Constantes;
 import com.mobilemedia.AppAlcaldiaSucre.custom.HomeCustom;
+import com.mobilemedia.AppAlcaldiaSucre.engine.BitmapManager;
 import com.mobilemedia.AppAlcaldiaSucre.engine.ScreenEngine;
 
 import net.rim.device.api.system.Bitmap;
@@ -26,17 +26,16 @@ public class HomeScreen extends MainScreen implements FieldChangeListener {
 		}
 		return instance;
 	}
-
- //   private CancelRequestItem cancelRequestItem;
-
-    private ListStyleButtonField listStyleButtonFieldNoticias;
-    private ListStyleButtonField listStyleButtonFieldAgenda;
-    private ListStyleButtonField listStyleButtonFieldDirectorio;
-    private ListStyleButtonField listStyleButtonFieldDenuncias;
+	
+    private ListStyleButtonHome listStyleButtonFieldNoticias;
+    private ListStyleButtonHome listStyleButtonFieldAgenda;
+    private ListStyleButtonHome listStyleButtonFieldDirectorio;
+    private ListStyleButtonHome listStyleButtonFieldDenuncias;
         
     public HomeScreen()
 	{
- //       addMenuItem( new RegisterMenuItem() );
+
+  //       addMenuItem( new RegisterMenuItem() );
  //       addMenuItem( new UnregisterMenuItem() );
  //       addMenuItem( new EnviarPush() );
  //       addMenuItem( new EliminarPersistencia() );
@@ -49,24 +48,25 @@ public class HomeScreen extends MainScreen implements FieldChangeListener {
 		ListStyleButtonSet buttonSet = new ListStyleButtonSet();
 				
 		
-		listStyleButtonFieldDenuncias = new ListStyleButtonField(null, "Denuncias", Constantes.MEDIUM_NORMAL_FONT, null, 0,1);		
+		listStyleButtonFieldDenuncias = new ListStyleButtonHome( "Denuncias", Constantes.MEDIUM_NORMAL_FONT, FIELD_HCENTER | FIELD_VCENTER, 1);		
 		listStyleButtonFieldDenuncias.setChangeListener(this);
 		
-		listStyleButtonFieldDirectorio = new ListStyleButtonField(null, "Directorio", Constantes.MEDIUM_NORMAL_FONT, null, 0,2);
+		listStyleButtonFieldDirectorio = new ListStyleButtonHome( "Directorio", Constantes.MEDIUM_NORMAL_FONT, 0, 2);
 		listStyleButtonFieldDirectorio.setChangeListener(this);		
 		
-		listStyleButtonFieldAgenda = new ListStyleButtonField(null, "Agenda Sucre", Constantes.MEDIUM_NORMAL_FONT, null, 0,3);
+		listStyleButtonFieldAgenda = new ListStyleButtonHome( "Agenda Sucre", Constantes.MEDIUM_NORMAL_FONT, 0,3);
 		listStyleButtonFieldAgenda.setChangeListener(this);
 		
-		listStyleButtonFieldNoticias = new ListStyleButtonField(null, "Noticias", Constantes.MEDIUM_NORMAL_FONT, null, 0,4);
+		listStyleButtonFieldNoticias = new ListStyleButtonHome( "Noticias", Constantes.MEDIUM_NORMAL_FONT, 0, 4);
 		listStyleButtonFieldNoticias.setChangeListener(this);
+		
 		
 		buttonSet.add(listStyleButtonFieldDenuncias);
 		buttonSet.add(listStyleButtonFieldDirectorio);
 		buttonSet.add(listStyleButtonFieldAgenda);
 		buttonSet.add(listStyleButtonFieldNoticias);
 		
-		BitmapField bf = new BitmapField( null, FIELD_HCENTER | USE_ALL_WIDTH );
+		BitmapField bf = new BitmapField(BitmapManager.getInstance().getLogoAlcaldiaSucre() , FIELD_HCENTER | USE_ALL_WIDTH );
 		bf.setBackground(BackgroundFactory.createSolidBackground(0x00FCB53E));
 		bf.setPadding(10, 123, 5, 100);
 	//	bf.setPadding(0,0,0,0);

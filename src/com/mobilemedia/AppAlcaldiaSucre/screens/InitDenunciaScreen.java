@@ -12,7 +12,7 @@ import com.mobilemedia.AppAlcaldiaSucre.componentes.ListStyleButtonSet;
 import com.mobilemedia.AppAlcaldiaSucre.custom.Constantes;
 
 
-public class InitDenunciaScreen extends MainScreen implements FieldChangeListener {
+/*public class InitDenunciaScreen extends MainScreen implements FieldChangeListener {
 	private static InitDenunciaScreen instance;
 	
 	private static InitDenunciaScreen getInstance() {
@@ -55,4 +55,4 @@ public class InitDenunciaScreen extends MainScreen implements FieldChangeListene
 		if (field == listStyleButtonFieldDenuncias) {}
 		if (field == listStyleButtonFIeldRegistro) {}
 	}
-}
+}*/

@@ -31,44 +31,33 @@ public class ListStyleButtonField extends Field
     public static int DRAWPOSITION_MIDDLE = 2;
     public static int DRAWPOSITION_SINGLE = 3;
     
-    private static final int CORNER_RADIUS = 18;
+    protected static final int CORNER_RADIUS = 18;
     
-    private static final int HPADDING = Display.getWidth() <= 320 ? 6 : 8;
-    private static final int VPADDING = 4;
+    protected static final int HPADDING = Display.getWidth() <= 320 ? 6 : 8;
+    protected static final int VPADDING = 4;
     
-    private static int COLOR_BACKGROUND = 0xFFFFFF;
-    private static int COLOR_BORDER = 0x00f1f1f1;
-    private static int COLOR_BACKGROUND_FOCUS = 0xebebeb;
+    protected static int COLOR_BACKGROUND = 0xFFFFFF;
+    protected static int COLOR_BORDER = 0xFFFFFF;
+    protected static int COLOR_BACKGROUND_FOCUS = 0xebebeb;
     
     
-    private MyLabelField _labelField;
-    private Bitmap _leftIcon;
-    private Bitmap _actionIcon;
+    protected MyLabelField _labelField;
+    protected Bitmap _leftIcon;
+    protected Bitmap _actionIcon;
     
-    private int _targetHeight;
-    private int _rightOffset;
-    private int _leftOffset;
-    private int _labelHeight;
-    private int _indexButton = 0;
+    protected int _targetHeight;
+    protected int _rightOffset;
+    protected int _leftOffset;
+    protected int _labelHeight;
+    protected int _indexButton = 0;
     
-    private int _drawPosition = -1;
-    
-    private int contextChangeListener = 0; // Modificado
-	private static Border bordes = BorderFactory.createSimpleBorder(new XYEdges(1,0,1,0), 
-                                                   new XYEdges(0xf9f9f8, 0, 0xe0dfdf, 0), 
-                                                                      Border.STYLE_SOLID);
+    protected int _drawPosition = -1;
 
     public ListStyleButtonField( String label, Font fuente, long style )
     {
         this( label, fuente, null, style );
     }
     
-    // Modificado
-    public ListStyleButtonField( String label, Font fuente, Bitmap actionIcon, int contextChangeListener )
-    {
-        this( label, fuente, actionIcon, (long ) 0 );
-        this.contextChangeListener = contextChangeListener;
-    }
     
     public ListStyleButtonField( String label, Font fuente, Bitmap actionIcon, long style )
     {
@@ -88,17 +77,6 @@ public class ListStyleButtonField extends Field
         _actionIcon = actionIcon;
         _leftIcon = icon;
     }
-    
-    public ListStyleButtonField( Bitmap icon, String label, Font fuente, Bitmap actionIcon, long style, int index)
-    {
-        super( USE_ALL_WIDTH | Field.FOCUSABLE );
-               
-        _labelField = new MyLabelField( label, fuente, style );
-        _actionIcon = actionIcon;
-        _leftIcon = icon;
-        _indexButton = index; 
-    }
-    
     
     /**
      * DRAWPOSITION_TOP | DRAWPOSITION_BOTTOM | DRAWPOSITION_MIDDLE
@@ -157,7 +135,7 @@ public class ListStyleButtonField extends Field
     public void setText( String text )
     {
         _labelField.setText( text );
-        updateLayout();
+//        updateLayout();
     }
     
     protected void paint( Graphics g )
@@ -188,24 +166,6 @@ public class ListStyleButtonField extends Field
             // it's like a list field, let the default background be drawn
             super.paintBackground( g );
             return;
-        }
-        
-        if (_indexButton == 1) {
-        	COLOR_BACKGROUND = 0xf68025;
-        	COLOR_BORDER = 0xf68025;
-        	COLOR_BACKGROUND_FOCUS = 0xb85000;
-        } else if (_indexButton == 2) {
-        	COLOR_BACKGROUND = 0xf8981c;
-        	COLOR_BORDER = 0xf8981c;
-        	COLOR_BACKGROUND_FOCUS = 0xc67001;
-        } else if (_indexButton == 3) {
-        	COLOR_BACKGROUND = 0x6cb33e;
-        	COLOR_BORDER = 0x6cb33e;
-        	COLOR_BACKGROUND_FOCUS = 0x3b8a08;
-        } else if (_indexButton == 4) {
-        	COLOR_BACKGROUND = 0x00a94e;
-        	COLOR_BORDER = 0x00a94e;
-        	COLOR_BACKGROUND_FOCUS = 0x007837;
         }
         
         int oldColour = g.getColor();
@@ -242,16 +202,6 @@ public class ListStyleButtonField extends Field
         } finally {
             g.setColor( oldColour );
         }
-        
-        // Modificado
-//        setBorder( bordes );
-		// ebebeb
-//    	super.setBackground(BackgroundFactory.createBitmapBackground(
-//                                     Bitmap.getBitmapResource("Rejilla_Transparente.png"), 
-//                                     Background.POSITION_X_LEFT, 
-//                                     Background.POSITION_Y_BOTTOM, 
-//                                     Background.REPEAT_BOTH    ) 
-//                      );
     }
     
     protected void drawFocus( Graphics g, boolean on )
@@ -311,7 +261,7 @@ public class ListStyleButtonField extends Field
      */
     public void clickButton() 
     {
-        fieldChangeNotify( contextChangeListener );
+        fieldChangeNotify( 0 );
     }
        
 //#ifndef VER_4.6.1 | VER_4.6.0 | VER_4.5.0 | VER_4.2.1 | VER_4.2.0
@@ -337,7 +287,7 @@ public class ListStyleButtonField extends Field
     public void setMuddy( boolean muddy ) {}
     
     
-    private static class MyLabelField extends LabelField
+    protected static class MyLabelField extends LabelField
     {
         
         public MyLabelField( String text, Font fuente, long style )
@@ -353,7 +303,7 @@ public class ListStyleButtonField extends Field
         
         public void paint( Graphics g ) 
         {
-        	g.setColor(0x2b2b2b);
+//        	g.setColor(0x2b2b2b);
             super.paint( g );
         }
     }
