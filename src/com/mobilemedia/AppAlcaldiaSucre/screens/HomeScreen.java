@@ -48,21 +48,16 @@ public class HomeScreen extends MainScreen implements FieldChangeListener {
     	
 		ListStyleButtonSet buttonSet = new ListStyleButtonSet();
 				
-		Bitmap b;
 		
-		b = HomeCustom.SIN_MENSAJE_ICONO;
 		listStyleButtonFieldDenuncias = new ListStyleButtonField(null, "Denuncias", Constantes.MEDIUM_NORMAL_FONT, null, 0,1);		
 		listStyleButtonFieldDenuncias.setChangeListener(this);
 		
-		b = Bitmap.getBitmapResource(HomeCustom.NOTICIAS_ICONO);
 		listStyleButtonFieldDirectorio = new ListStyleButtonField(null, "Directorio", Constantes.MEDIUM_NORMAL_FONT, null, 0,2);
 		listStyleButtonFieldDirectorio.setChangeListener(this);		
 		
-		b = Bitmap.getBitmapResource(HomeCustom.CATALOGO_ICONO);
 		listStyleButtonFieldAgenda = new ListStyleButtonField(null, "Agenda Sucre", Constantes.MEDIUM_NORMAL_FONT, null, 0,3);
 		listStyleButtonFieldAgenda.setChangeListener(this);
 		
-		b = Bitmap.getBitmapResource(HomeCustom.LOCALIZADOR_ICONO);
 		listStyleButtonFieldNoticias = new ListStyleButtonField(null, "Noticias", Constantes.MEDIUM_NORMAL_FONT, null, 0,4);
 		listStyleButtonFieldNoticias.setChangeListener(this);
 		
@@ -71,7 +66,7 @@ public class HomeScreen extends MainScreen implements FieldChangeListener {
 		buttonSet.add(listStyleButtonFieldAgenda);
 		buttonSet.add(listStyleButtonFieldNoticias);
 		
-		BitmapField bf = new BitmapField( HomeCustom.LOGO, FIELD_HCENTER | USE_ALL_WIDTH );
+		BitmapField bf = new BitmapField( null, FIELD_HCENTER | USE_ALL_WIDTH );
 		bf.setBackground(BackgroundFactory.createSolidBackground(0x00FCB53E));
 		bf.setPadding(10, 123, 5, 100);
 	//	bf.setPadding(0,0,0,0);
