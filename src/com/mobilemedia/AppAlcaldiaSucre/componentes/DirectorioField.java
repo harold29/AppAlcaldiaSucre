@@ -4,13 +4,9 @@ package com.mobilemedia.AppAlcaldiaSucre.componentes;
 
 import com.mobilemedia.AppAlcaldiaSucre.custom.Constantes;
 import com.mobilemedia.AppAlcaldiaSucre.custom.ListaDirectorioCustom;
-import com.mobilemedia.AppAlcaldiaSucre.custom.ListaDirectorioCustom;
-import com.mobilemedia.AppAlcaldiaSucre.custom.ListaNoticiaCustom;
 import com.mobilemedia.AppAlcaldiaSucre.engine.ScreenEngine;
-import com.mobilemedia.AppAlcaldiaSucre.facade.FotoSmallFacade;
 import com.mobilemedia.AppAlcaldiaSucre.interfaces.CargaBitmap;
 import com.mobilemedia.AppAlcaldiaSucre.objetos.Directorio;
-import com.mobilemedia.AppAlcaldiaSucre.objetos.Noticia;
 
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.FieldChangeListener;

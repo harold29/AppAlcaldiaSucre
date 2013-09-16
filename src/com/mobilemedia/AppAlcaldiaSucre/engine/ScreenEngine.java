@@ -53,6 +53,11 @@ public class ScreenEngine
         app.pushScreen(screen);
     }
     
+    public void goDenuncias() {
+    	DenunciasScreen screen = DenunciasScreen.getInstance();
+    	app.pushScreen(screen);
+    }
+    
     public void goNoticias(){
     	NoticiasScreen screen = NoticiasScreen.getInstance();
         app.pushScreen(screen);

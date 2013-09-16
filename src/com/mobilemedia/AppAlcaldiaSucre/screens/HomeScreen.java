@@ -43,7 +43,7 @@ public class HomeScreen extends MainScreen implements FieldChangeListener {
 		ListStyleButtonSet buttonSet = new ListStyleButtonSet();
 				
 		
-		listStyleButtonFieldDenuncias = new ListStyleButtonHome( "Denuncias", Constantes.MEDIUM_NORMAL_FONT, FIELD_HCENTER | FIELD_VCENTER, 1);		
+		listStyleButtonFieldDenuncias = new ListStyleButtonHome( "Denuncias", Constantes.MEDIUM_NORMAL_FONT, FIELD_HCENTER | Field.FIELD_VCENTER, 1);		
 		listStyleButtonFieldDenuncias.setChangeListener(this);
 		
 		listStyleButtonFieldDirectorio = new ListStyleButtonHome( "Directorio", Constantes.MEDIUM_NORMAL_FONT, 0, 2);
@@ -73,8 +73,9 @@ public class HomeScreen extends MainScreen implements FieldChangeListener {
     
 
 	public void fieldChanged(Field field, int context) {
-		 if( field == listStyleButtonFieldNoticias 	) { ScreenEngine.getInstance().goNoticias(); }	
+		 if (field == listStyleButtonFieldNoticias 	) { ScreenEngine.getInstance().goNoticias(); }	
 		 if (field == listStyleButtonFieldDirectorio) { ScreenEngine.getInstance().goDirectorio(); }
+		 if (field == listStyleButtonFieldDenuncias)  { ScreenEngine.getInstance().goDenuncias(); }
 	}
 	
 }

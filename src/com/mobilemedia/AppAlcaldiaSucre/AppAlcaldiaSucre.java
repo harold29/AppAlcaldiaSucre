@@ -21,7 +21,6 @@ public class AppAlcaldiaSucre extends UiApplication
 		return instance;
 	}
 	
-	private static boolean seMostroScreen = false;
 	//com.mobilemedia.AppAlcaldiaSucre.mainEventLoggerID
 	public static long EventLoggerID = 0x64f2fd5a3c6fc5e7L;
 	 

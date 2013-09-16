@@ -34,10 +34,8 @@ private static final int SYSTEM_STYLE_SHIFT = 32;
     
     protected void sublayout( int width, int height )
     {
-        int availableWidth = width;
 
         int numFields = getFieldCount();
-        int maxPreferredWidth = 0;
         int maxHeight = 0;
 
 

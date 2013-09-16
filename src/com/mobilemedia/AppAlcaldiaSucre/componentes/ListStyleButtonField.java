@@ -21,8 +21,7 @@ package com.mobilemedia.AppAlcaldiaSucre.componentes;
 import net.rim.device.api.system.*;
 import net.rim.device.api.ui.*;
 import net.rim.device.api.ui.component.*;
-import net.rim.device.api.ui.decor.Border;
-import net.rim.device.api.ui.decor.BorderFactory;
+
 
 public class ListStyleButtonField extends Field
 {
