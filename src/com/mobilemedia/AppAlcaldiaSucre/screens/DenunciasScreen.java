@@ -16,6 +16,10 @@ import net.rim.device.api.ui.container.MainScreen;
 
 import com.mobilemedia.AppAlcaldiaSucre.componentes.EditFieldDenuncias;
 import com.mobilemedia.AppAlcaldiaSucre.componentes.LabelFieldCustomColor;
+import com.mobilemedia.AppAlcaldiaSucre.componentes.ListStyleButtonField;
+import com.mobilemedia.AppAlcaldiaSucre.componentes.ListStyleButtonHome;
+import com.mobilemedia.AppAlcaldiaSucre.componentes.ListStyleButtonSet;
+import com.mobilemedia.AppAlcaldiaSucre.custom.Constantes;
 import com.mobilemedia.AppAlcaldiaSucre.custom.ListaNoticiaCustom;
 
 public class DenunciasScreen extends MainScreen {
@@ -97,25 +101,20 @@ public class DenunciasScreen extends MainScreen {
 		editArea.setPadding(20,40,0,30);
 		pantalla.add(editArea);
 		
-		/*editArea = new VerticalFieldManager();
-		ButtonField submitButton = new ButtonField("Submit") {
-             protected boolean navigationClick(int status, int time) {
-                 return true;
-             }
-         };
-         editArea.add(submitButton);
-         pantalla.add(editArea);*/
+		ListStyleButtonSet buttonSet = new ListStyleButtonSet();
+		ListStyleButtonHome submitButton = new ListStyleButtonHome("Tomar Foto", Constantes.MEDIUM_NORMAL_FONT, FIELD_HCENTER | FIELD_VCENTER, 1);
+		buttonSet.add(submitButton);
+		buttonSet.setPadding(20, 40, 20, 40);
+		pantalla.add(buttonSet);
 		
-	//	pantalla.add(headerPage);
-	//	pantalla.add(label_field);
-	//	pantalla.add(editArea);
-	//	pantalla.add(direccionDenunciante);
-	//	pantalla.add(numeroDenunciante);
-	//	pantalla.add(emailDenunciante);
-	//	pantalla.add(submitButton);
+		buttonSet = new ListStyleButtonSet();
+		submitButton = new ListStyleButtonHome("Enviar Denuncia", Constantes.MEDIUM_NORMAL_FONT, FIELD_HCENTER | FIELD_VCENTER, 1);
+		buttonSet.add(submitButton);
+		buttonSet.setPadding(20, 40, 20, 40);	
+		pantalla.add(buttonSet);
 		
 		//add(submitButton);
 		add(pantalla);
-		add(submitButton);
+		//add(submitButton);
 	}
 }

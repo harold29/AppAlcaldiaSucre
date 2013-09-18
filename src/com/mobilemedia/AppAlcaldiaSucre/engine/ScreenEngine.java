@@ -79,6 +79,11 @@ public class ScreenEngine
     	app.pushScreen(screen);
     }
     
+    public void goCamera() {
+    	CameraScreen screen = CameraScreen.getInstance();
+    	app.pushScreen(screen);
+    }
+    
     public void popScreen() {
     	app.popScreen(app.getActiveScreen());
     }
