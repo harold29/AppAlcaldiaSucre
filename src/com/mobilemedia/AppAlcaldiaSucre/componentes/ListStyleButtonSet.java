@@ -16,22 +16,29 @@
 
 package com.mobilemedia.AppAlcaldiaSucre.componentes;
 
+import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.*;
 import net.rim.device.api.ui.container.*;
 
 public class ListStyleButtonSet extends VerticalFieldManager 
 {
     public static final int MARGIN = 0;
+    boolean lowRes = Display.getWidth() <= 320;
     
     public ListStyleButtonSet()
     {
-        super( NO_VERTICAL_SCROLL );
-        setMargin( MARGIN + 9, MARGIN, MARGIN, MARGIN );
+        super( NO_VERTICAL_SCROLL | FIELD_BOTTOM);
+        if (lowRes)
+        {
+        	setMargin(MARGIN + 9, MARGIN, MARGIN, MARGIN );
+        } else {
+        	setMargin(MARGIN + 80, MARGIN, MARGIN, MARGIN );
+        }
     }
     
     protected void sublayout( int maxWidth, int maxHeight )
     {
-        super.sublayout( maxWidth, 1000 );
+        super.sublayout( maxWidth, 2000 );
         
         int numChildren = this.getFieldCount();
         if( numChildren > 0 ) {

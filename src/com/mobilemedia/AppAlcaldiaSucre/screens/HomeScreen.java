@@ -36,7 +36,7 @@ public class HomeScreen extends MainScreen implements FieldChangeListener {
 	{
     	
     /**************************************************************************/
-    	VerticalFieldManager pantalla = new VerticalFieldManager(Field.NON_FOCUSABLE | NO_VERTICAL_SCROLL);
+    	VerticalFieldManager pantalla = new VerticalFieldManager(Field.NON_FOCUSABLE | NO_VERTICAL_SCROLL | FIELD_BOTTOM);
     	pantalla.setBackground(BackgroundFactory.createSolidBackground(0x00FCB53E));
     	//0x00FCB53E
     	

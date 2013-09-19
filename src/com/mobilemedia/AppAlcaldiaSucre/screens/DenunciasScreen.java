@@ -4,6 +4,7 @@ import javax.microedition.amms.control.camera.*;
 import javax.microedition.media.*;
 
 import net.rim.device.api.ui.Field;
+import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.XYEdges;
 import net.rim.device.api.ui.component.BasicEditField;
 import net.rim.device.api.ui.component.ButtonField;
@@ -21,8 +22,9 @@ import com.mobilemedia.AppAlcaldiaSucre.componentes.ListStyleButtonHome;
 import com.mobilemedia.AppAlcaldiaSucre.componentes.ListStyleButtonSet;
 import com.mobilemedia.AppAlcaldiaSucre.custom.Constantes;
 import com.mobilemedia.AppAlcaldiaSucre.custom.ListaNoticiaCustom;
+import com.mobilemedia.AppAlcaldiaSucre.engine.ScreenEngine;
 
-public class DenunciasScreen extends MainScreen {
+public class DenunciasScreen extends MainScreen implements FieldChangeListener {
 	
 	private static DenunciasScreen instance;
 	
@@ -34,6 +36,8 @@ public class DenunciasScreen extends MainScreen {
 	}
 	
 	private LabelFieldCustomColor labelPage;
+	ListStyleButtonHome photoButton;
+	ListStyleButtonHome submitButton;
 	
 	public DenunciasScreen() {
 		VerticalFieldManager pantalla = new VerticalFieldManager(Field.NON_FOCUSABLE | NO_VERTICAL_SCROLL | USE_ALL_HEIGHT | USE_ALL_WIDTH);
@@ -102,8 +106,9 @@ public class DenunciasScreen extends MainScreen {
 		pantalla.add(editArea);
 		
 		ListStyleButtonSet buttonSet = new ListStyleButtonSet();
-		ListStyleButtonHome submitButton = new ListStyleButtonHome("Tomar Foto", Constantes.MEDIUM_NORMAL_FONT, FIELD_HCENTER | FIELD_VCENTER, 1);
-		buttonSet.add(submitButton);
+		photoButton = new ListStyleButtonHome("Tomar Foto", Constantes.MEDIUM_NORMAL_FONT, FIELD_HCENTER | FIELD_VCENTER, 1);
+		photoButton.setChangeListener(this);
+		buttonSet.add(photoButton);
 		buttonSet.setPadding(20, 40, 20, 40);
 		pantalla.add(buttonSet);
 		
@@ -116,5 +121,10 @@ public class DenunciasScreen extends MainScreen {
 		//add(submitButton);
 		add(pantalla);
 		//add(submitButton);
+	}
+	
+	public void fieldChanged(Field field, int context) {
+		if (field == photoButton) { ScreenEngine.getInstance().goCamera(); }
+		if (field == submitButton) { System.out.println("********GO SUBMIT*******"); }
 	}
 }

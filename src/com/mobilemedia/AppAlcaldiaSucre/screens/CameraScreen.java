@@ -10,6 +10,7 @@ import com.mobilemedia.AppAlcaldiaSucre.custom.ListaNoticiaCustom;
 import com.mobilemedia.AppAlcaldiaSucre.engine.ScreenEngine;
 
 import net.rim.device.api.ui.Field;
+import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.EditField;
 import net.rim.device.api.ui.container.HorizontalFieldManager;
 import net.rim.device.api.ui.container.MainScreen;
@@ -41,17 +42,18 @@ public class CameraScreen extends MainScreen {
 		
 		HorizontalFieldManager headerPage = new HorizontalFieldManager(Field.FIELD_VCENTER | Field.FIELD_HCENTER | Field.USE_ALL_WIDTH);
 		headerPage.setBackground(BackgroundFactory.createSolidBackground(0xf8981c));
-		headerPage.setPadding(10,10,10,10);
+		headerPage.setPadding(10,10,20,10);
 		headerPage.add(labelPage);
 		pantalla.add(headerPage);
 		
 		inicializarCamara();
-		
-		add(_areaVideo);
+		_areaVideo.setPadding(0,0,0,0);
+		pantalla.add(_areaVideo);
 		
 		//pantalla.add(headerPage);
 		
 		//ListStyleButtonSet buttonSet = new ListStyleButtonSet();
+		add(pantalla);
 	}
 	
 	
@@ -66,7 +68,9 @@ public class CameraScreen extends MainScreen {
 	
 	
 	private void createImageScreen(byte[] raw) {
-		ScreenEngine.getInstance().goDenuncias();
+		ImageScreen imageScreen = new ImageScreen(raw);
+		
+		UiApplication.getUiApplication().pushScreen(imageScreen);
 	}
 	
 	
@@ -81,8 +85,7 @@ public class CameraScreen extends MainScreen {
 				_areaVideo = (Field) _controlVideo.initDisplayMode(VideoControl.USE_GUI_PRIMITIVE, "net.rim.device.api.ui.Field");
 				_controlVideo.setDisplayFullScreen(false);
 				_controlVideo.setVisible(true);
-			}
-			
+			}		
 			user.start();
 		} catch (Exception e) {
 			System.out.println("ERROR: " + e.getMessage());

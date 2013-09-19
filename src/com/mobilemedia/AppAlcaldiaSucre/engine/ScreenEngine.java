@@ -48,43 +48,57 @@ public class ScreenEngine
 		// FIN: Efectos visuales
     }
     
-    public void goHome(){
+    public void goHome()
+    {
     	HomeScreen screen = HomeScreen.getInstance();
         app.pushScreen(screen);
     }
     
-    public void goDenuncias() {
+    public void goDenuncias() 
+    {
     	DenunciasScreen screen = DenunciasScreen.getInstance();
     	app.pushScreen(screen);
     }
     
-    public void goNoticias(){
+    public void goNoticias()
+    {
     	NoticiasScreen screen = NoticiasScreen.getInstance();
         app.pushScreen(screen);
         //screen.actualizar(false);
     }
     
-    public void goDetalleNoticia(Noticia n){
+    public void goDetalleNoticia(Noticia n)
+    {
     	DetalleNoticiaScreen screen = DetalleNoticiaScreen.getInstance(n);
         app.pushScreen(screen);
     }
     
-    public void goDirectorio() {
+    public void goDirectorio() 
+    {
     	DirectorioScreen screen = DirectorioScreen.getInstance();
     	app.pushScreen(screen);
     }
     
-    public void goDetalleDirectorio(Directorio d) {
+    public void goDetalleDirectorio(Directorio d) 
+    {
     	DetalleDirectorioScreen screen = DetalleDirectorioScreen.getInstance(d);
     	app.pushScreen(screen);
     }
     
-    public void goCamera() {
+    public void goCamera() 
+    {
     	CameraScreen screen = CameraScreen.getInstance();
     	app.pushScreen(screen);
     }
     
-    public void popScreen() {
+    public void goImage(byte[] raw) 
+    {
+    	ImageScreen screen = ImageScreen.getInstance(raw);
+    	app.pushScreen(screen);
+    }
+    
+    public void popScreen() 
+    {
     	app.popScreen(app.getActiveScreen());
     }
 }

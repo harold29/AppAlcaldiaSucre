@@ -242,27 +242,13 @@ public class DirectorioField extends BaseButtonField implements FieldChangeListe
         }
 	}
 
-//	protected void drawFocus(Graphics graphics, boolean on) {
-//	}
-//	
-//	public void focusChangeNotify(int arg0) {
-//		invalidate();
-//		super.focusChangeNotify(arg0);
-//	}
-
-//	public Noticia getNoticia() {
-//		return noticia;
-//	}
-//
-//	public void setNoticia(Noticia noticia) {
-//		this.noticia = noticia;
-//	}
 
 	// ******* Implementacion de los Metodos de la Interfaz: FieldChangeListener *******
+	
 	public void fieldChanged(Field field, int context) {
-//		Dialog.inform("num Request en cola:" + BBRequestQueue.getInstance().getRequestCount());
 		ScreenEngine.getInstance().goDetalleDirectorio(directorio);
 	}
+	
 	// ******* FIN Implementacion de los Metodos de la Interfaz: FieldChangeListener *******
 	
 	
