@@ -68,7 +68,7 @@ public class DirectorioScreen extends MainScreen implements CreadorJson.ScreenCo
 		add(contenedorNumeros);
 		
 		ScreenEngine.getInstance().activarEfectoVisualSlide(this);
-		actualizar(false);
+		actualizar(false); 
 	}
 
 	

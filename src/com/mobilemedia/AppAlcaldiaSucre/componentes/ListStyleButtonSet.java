@@ -22,7 +22,7 @@ import net.rim.device.api.ui.container.*;
 
 public class ListStyleButtonSet extends VerticalFieldManager 
 {
-    public static final int MARGIN = 0;
+    public static final int MARGIN = 20;
     boolean lowRes = Display.getWidth() <= 320;
     
     public ListStyleButtonSet()
@@ -30,9 +30,9 @@ public class ListStyleButtonSet extends VerticalFieldManager
         super( NO_VERTICAL_SCROLL | FIELD_BOTTOM);
         if (lowRes)
         {
-        	setMargin(MARGIN + 9, MARGIN, MARGIN, MARGIN );
+        	setMargin(MARGIN-10, 0, 0, 0 );
         } else {
-        	setMargin(MARGIN + 80, MARGIN, MARGIN, MARGIN );
+        	setMargin(MARGIN, 0, 0, 0 );
         }
     }
     

@@ -8,6 +8,7 @@ import com.mobilemedia.AppAlcaldiaSucre.engine.BitmapManager;
 import com.mobilemedia.AppAlcaldiaSucre.engine.ScreenEngine;
 
 import net.rim.device.api.system.Bitmap;
+import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.Graphics;
@@ -31,6 +32,8 @@ public class HomeScreen extends MainScreen implements FieldChangeListener {
     private ListStyleButtonHome listStyleButtonFieldAgenda;
     private ListStyleButtonHome listStyleButtonFieldDirectorio;
     private ListStyleButtonHome listStyleButtonFieldDenuncias;
+    
+    boolean lowRes = Display.getWidth() <= 320;
         
     public HomeScreen()
 	{
@@ -61,9 +64,19 @@ public class HomeScreen extends MainScreen implements FieldChangeListener {
 		buttonSet.add(listStyleButtonFieldAgenda);
 		buttonSet.add(listStyleButtonFieldNoticias);
 		
-		BitmapField bf = new BitmapField(BitmapManager.getInstance().getLogoAlcaldiaSucre() , FIELD_HCENTER | USE_ALL_WIDTH );
-		bf.setBackground(BackgroundFactory.createSolidBackground(0x00FCB53E));
-		bf.setPadding(10, 123, 5, 100);
+		BitmapField bf;
+		
+		if (lowRes) {
+			bf = new BitmapField(BitmapManager.getInstance().getLogoAlcaldiaSucre() , FIELD_HCENTER | USE_ALL_WIDTH );
+			bf.setBackground(BackgroundFactory.createSolidBackground(0x00FCB53E));
+			bf.setPadding(10, 123, 5, 100);
+		} else {
+			bf = new BitmapField(BitmapManager.getInstance().getLogoAlcaldiaSucreMedium() , FIELD_HCENTER | USE_ALL_WIDTH );
+			bf.setBackground(BackgroundFactory.createSolidBackground(0x00FCB53E));
+			bf.setPadding(10, 0,0,0);
+		}
+		
+		//bf.setPadding(10, 123, 5, 100);
 		pantalla.add(bf);
 		pantalla.add(buttonSet);
 

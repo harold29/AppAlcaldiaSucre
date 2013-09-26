@@ -16,6 +16,7 @@ public final class BitmapManager {
 	private Bitmap logoAlcaldiaSucreLarge = null;
 	private Bitmap backg_image = null;
 	private Bitmap news_img = null;
+	private Bitmap logoAlcaldiaMedium = null;
 	
 	private int caso = -1;
 	
@@ -41,6 +42,7 @@ public final class BitmapManager {
 		logoAlcaldiaSucre = Bitmap.getBitmapResource(HomeCustom.LOGO);
 		logoAlcaldiaSucreLarge = Bitmap.getBitmapResource(HomeCustom.LOGO_LARGE);
 		backg_image = Bitmap.getBitmapResource(HomeCustom.BACKGROUND_GENERAL_IMG);
+		logoAlcaldiaMedium = scaleWidthBitmap(HomeCustom.LOGO_MEDIUM, 130);
 	}
 	
 	public final Bitmap scaleWidthBitmap(String ruta, int tam) {
@@ -74,6 +76,10 @@ public final class BitmapManager {
 	
 	public Bitmap getLogoAlcaldiaSucreLarge() {
 		return logoAlcaldiaSucreLarge;
+	}
+	
+	public Bitmap getLogoAlcaldiaSucreMedium() {
+		return logoAlcaldiaMedium;
 	}
 	
 	public Bitmap getBackgroundImage() {
