@@ -56,8 +56,8 @@ public class ScreenEngine
     
     public void goDenuncias() 
     {
-    	DenunciasScreen screen = DenunciasScreen.getInstance();
-    	app.pushScreen(screen);
+     	DenunciasScreen screen = DenunciasScreen.getInstance();
+    	 app.pushScreen(screen);
     }
     
     public void goNoticias()

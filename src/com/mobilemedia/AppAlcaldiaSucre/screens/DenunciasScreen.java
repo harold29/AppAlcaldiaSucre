@@ -13,6 +13,7 @@ import net.rim.device.api.io.file.FileSystemJournal;
 import net.rim.device.api.io.file.FileSystemJournalEntry;
 import net.rim.device.api.io.file.FileSystemJournalListener;
 import net.rim.device.api.math.Fixed32;
+import net.rim.device.api.system.Application;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.Characters;
 import net.rim.device.api.system.ControlledAccessException;
@@ -22,8 +23,11 @@ import net.rim.device.api.system.EventInjector;
 import net.rim.device.api.system.EventInjector.KeyEvent;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
+import net.rim.device.api.ui.Graphics;
+import net.rim.device.api.ui.Manager;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.XYEdges;
+import net.rim.device.api.ui.XYRect;
 import net.rim.device.api.ui.component.BasicEditField;
 import net.rim.device.api.ui.component.BitmapField;
 import net.rim.device.api.ui.component.ButtonField;
@@ -56,7 +60,7 @@ public class DenunciasScreen extends MainScreen implements FieldChangeListener, 
 		}
 		return instance;
 	}
-	
+	  
 	private VerticalFieldManager pantalla, imgZone;
 	private boolean ejecuto;
 	private boolean changePic = false;
@@ -76,10 +80,19 @@ public class DenunciasScreen extends MainScreen implements FieldChangeListener, 
 	ListStyleButtonHome saveButton;
 	
 	public DenunciasScreen() {
-		pantalla = new VerticalFieldManager(Field.NON_FOCUSABLE | NO_VERTICAL_SCROLL | USE_ALL_WIDTH);
+		Application.getApplication().addFileSystemJournalListener(this);
+		loadScreen();
+		add(pantalla);
+		add(imgZone);
+		//add(submitButton);
+		
+	}
+	
+	public void loadScreen () {
+		pantalla = new VerticalFieldManager(Field.NON_FOCUSABLE | USE_ALL_WIDTH);
 		pantalla.setBackground(BackgroundFactory.createSolidBackground(0x00FCB53E));
 		
-		imgZone = new VerticalFieldManager(Field.NON_FOCUSABLE | NO_VERTICAL_SCROLL | FIELD_HCENTER);
+		imgZone = new VerticalFieldManager(Field.NON_FOCUSABLE | FIELD_HCENTER | USE_ALL_WIDTH);
 		imgZone.setBackground(BackgroundFactory.createSolidBackground(0x00FCB53E));
 		
 		labelPage = new LabelFieldCustomColor("Directorio", Field.NON_FOCUSABLE | Field.FIELD_HCENTER, ListaNoticiaCustom.FECHA_ACTUALIZACION_FONT_COLOR,
@@ -172,12 +185,25 @@ public class DenunciasScreen extends MainScreen implements FieldChangeListener, 
 		borrar = new ButtonField("Borrar Foto", ButtonField.CONSUME_CLICK | FIELD_HCENTER);
 		borrar.setChangeListener(this);
 		//imgZone.add(borrar);
-		
-		//add(submitButton);
-		add(pantalla);
-		add(imgZone);
-		//add(submitButton);
-		
+	}
+	
+	public void fieldChanged(Field field, int context) 
+	{
+		if (field == photoButton) 
+		{ 
+			ejecuto = false;
+			Invoke.invokeApplication(Invoke.APP_TYPE_CAMERA, new CameraArguments());
+			changePic = true;
+			//ScreenEngine.getInstance().goCamera(); 
+		}
+		if (field == submitButton) 
+		{
+			System.out.println("********GO SUBMIT*******"); 
+		}		
+		if (field == borrar) {
+			ejecuto = false;
+			ei2 = null;
+		}
 	}
 	
 	public void fileJournalChanged() 
@@ -199,7 +225,7 @@ public class DenunciasScreen extends MainScreen implements FieldChangeListener, 
 						injector.post();
 						injector.post();
 						setFoto(path);
-						ejecuto = true;
+	//					ejecuto = true;
 					}
 				} catch (ControlledAccessException e) {
 					Dialog.alert("Por favor conceda los permisos a la aplicación.\n" + e.getMessage());
@@ -214,35 +240,34 @@ public class DenunciasScreen extends MainScreen implements FieldChangeListener, 
 	{
 		try {
 			FileConnection fc = (FileConnection) Connector.open("file://" + file);
-			
+		
 			InputStream is = fc.openInputStream();
-			img = new byte [(int) fc.fileSize()];
-			
+			img = new byte [(int) fc.fileSize()];		
 			is.read(img);
-			
 			is.close();
 			fc.close();
 			EncodedImage ei = EncodedImage.createEncodedImage(img, 0, img.length);
-			
 			ei2 = scaleToFactor(ei, ei.getWidth(), 200);
-			
-			if (Display.getOrientation() == Display.ORIENTATION_PORTRAIT) 
-			{
+
+			if (Display.getOrientation() == Display.ORIENTATION_PORTRAIT) {
 				ei3 = ImageManipulator.rotate(ei2.getBitmap(), 270);
-			} else 
-			{
+			} else {
 				ei3 = ei2.getBitmap();
 				imgHorizontal = true;
 			}
 			
 			foto.setBitmap(ei3);
+						
 			imgZone.deleteAll();
 			imgZone.add(foto);
 			imgZone.add(cambiar);
+			//pantalla.add(imgZone);
+			//add(pantalla);
 			//vfmCentral.add(cambiar);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("ERROR DE SETFOTO: " + e.getMessage());
 		}
 	}
 	
@@ -254,22 +279,28 @@ public class DenunciasScreen extends MainScreen implements FieldChangeListener, 
 		return encoded.scaleImage32(scale, scale);
 	}
 	
-	public void fieldChanged(Field field, int context) 
+	
+	
+	public boolean onClose() 
 	{
-		if (field == photoButton) 
-		{ 
-			ejecuto = false;
-			Invoke.invokeApplication(Invoke.APP_TYPE_CAMERA, new CameraArguments());
-			changePic = true;
-			//ScreenEngine.getInstance().goCamera(); 
-		}
-		if (field == submitButton) 
+		
+//		LocalyticsEngine.getInstance().tagEvent(EventsLocalytics.ESTACIONAMIENTO);
+//		this.close();
+//		return true;
+		
+		if (changePic)
 		{
-			System.out.println("********GO SUBMIT*******"); 
-		}		
-		if (field == borrar) {
-			ejecuto = false;
-			ei2 = null;
+			int response = Dialog.ask(Dialog.D_YES_NO, "¿Desea guardar los cambios?");
+			if(response == Dialog.YES){
+			//	guardarUbicacion();
+				return true;
+			}else{
+				return super.onClose();
+			}
+			
+		} else{
+		
+			return super.onClose();
 		}
 	}
 }
