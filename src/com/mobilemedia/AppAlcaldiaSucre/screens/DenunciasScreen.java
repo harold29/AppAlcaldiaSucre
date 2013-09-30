@@ -2,10 +2,8 @@ package com.mobilemedia.AppAlcaldiaSucre.screens;
 
 import java.io.InputStream;
 
-import javax.microedition.amms.control.camera.*;
 import javax.microedition.io.Connector;
 import javax.microedition.io.file.FileConnection;
-import javax.microedition.media.*;
 
 import net.rim.blackberry.api.invoke.CameraArguments;
 import net.rim.blackberry.api.invoke.Invoke;
@@ -20,34 +18,23 @@ import net.rim.device.api.system.ControlledAccessException;
 import net.rim.device.api.system.Display;
 import net.rim.device.api.system.EncodedImage;
 import net.rim.device.api.system.EventInjector;
-import net.rim.device.api.system.EventInjector.KeyEvent;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
-import net.rim.device.api.ui.Graphics;
-import net.rim.device.api.ui.Manager;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.XYEdges;
-import net.rim.device.api.ui.XYRect;
 import net.rim.device.api.ui.component.BasicEditField;
 import net.rim.device.api.ui.component.BitmapField;
 import net.rim.device.api.ui.component.ButtonField;
 import net.rim.device.api.ui.component.Dialog;
-import net.rim.device.api.ui.component.EditField;
 import net.rim.device.api.ui.container.HorizontalFieldManager;
 import net.rim.device.api.ui.container.VerticalFieldManager;
 import net.rim.device.api.ui.decor.BackgroundFactory;
 import net.rim.device.api.ui.decor.BorderFactory;
 import net.rim.device.api.ui.container.MainScreen;
 
-import com.mobilemedia.AppAlcaldiaSucre.componentes.EditFieldDenuncias;
 import com.mobilemedia.AppAlcaldiaSucre.componentes.LabelFieldCustomColor;
-import com.mobilemedia.AppAlcaldiaSucre.componentes.ListStyleButtonField;
 import com.mobilemedia.AppAlcaldiaSucre.componentes.ListStyleButtonHome;
-import com.mobilemedia.AppAlcaldiaSucre.componentes.ListStyleButtonSet;
-import com.mobilemedia.AppAlcaldiaSucre.custom.Constantes;
 import com.mobilemedia.AppAlcaldiaSucre.custom.ListaNoticiaCustom;
-import com.mobilemedia.AppAlcaldiaSucre.engine.ScreenEngine;
-import com.mobilemedia.AppAlcaldiaSucre.engine.BitmapManager;
 import com.mobilemedia.AppAlcaldiaSucre.utilidades.ImageManipulator;
 
 public class DenunciasScreen extends MainScreen implements FieldChangeListener, FileSystemJournalListener {
@@ -68,7 +55,7 @@ public class DenunciasScreen extends MainScreen implements FieldChangeListener, 
 	private BitmapField foto;
 	byte img[] = null;
 	private EncodedImage ei2;
-	private ButtonField photoButton,cambiar, guardar, borrar, submitButton;
+	ButtonField photoButton,cambiar, guardar, borrar, submitButton;
 	Bitmap ei3;
 	
 	
@@ -170,6 +157,10 @@ public class DenunciasScreen extends MainScreen implements FieldChangeListener, 
 		buttonSet.setPadding(20, 40, 20, 40);	
 		pantalla.add(buttonSet);*/
 		
+		foto = new BitmapField(null,FIELD_HCENTER);
+		imgZone.add(foto);
+		foto.setPadding(20, 10, 10, 10);
+		
 		photoButton = new ButtonField("Foto", ButtonField.CONSUME_CLICK | FIELD_HCENTER);
 		photoButton.setChangeListener(this);
 		imgZone.add(photoButton);
@@ -182,8 +173,9 @@ public class DenunciasScreen extends MainScreen implements FieldChangeListener, 
 		cambiar.setChangeListener(this);
 		//imgZone.add(cambiar);
 		
-		borrar = new ButtonField("Borrar Foto", ButtonField.CONSUME_CLICK | FIELD_HCENTER);
+		borrar = new ButtonField("Borrar", ButtonField.CONSUME_CLICK | FIELD_HCENTER);
 		borrar.setChangeListener(this);
+		imgZone.add(borrar);
 		//imgZone.add(borrar);
 	}
 	
@@ -203,6 +195,12 @@ public class DenunciasScreen extends MainScreen implements FieldChangeListener, 
 		if (field == borrar) {
 			ejecuto = false;
 			ei2 = null;
+			loadScreen();
+		}
+		if (field == changeButton) 
+		{
+			ejecuto = false;
+			Invoke.invokeApplication(Invoke.APP_TYPE_CAMERA, new CameraArguments());
 		}
 	}
 	
@@ -225,7 +223,7 @@ public class DenunciasScreen extends MainScreen implements FieldChangeListener, 
 						injector.post();
 						injector.post();
 						setFoto(path);
-	//					ejecuto = true;
+						ejecuto = true;
 					}
 				} catch (ControlledAccessException e) {
 					Dialog.alert("Por favor conceda los permisos a la aplicación.\n" + e.getMessage());
@@ -236,7 +234,7 @@ public class DenunciasScreen extends MainScreen implements FieldChangeListener, 
 		}
 	}
 	
-	private void setFoto(String file) 
+	public void setFoto(String file) 
 	{
 		try {
 			FileConnection fc = (FileConnection) Connector.open("file://" + file);
@@ -258,16 +256,19 @@ public class DenunciasScreen extends MainScreen implements FieldChangeListener, 
 			
 			foto.setBitmap(ei3);
 						
-			imgZone.deleteAll();
-			imgZone.add(foto);
+			loadScreen();
 			imgZone.add(cambiar);
+//			imgZone.add(borrar);
+//			imgZone.add(submitButton);
+//			loadScreen();
 			//pantalla.add(imgZone);
 			//add(pantalla);
 			//vfmCentral.add(cambiar);
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("ERROR DE SETFOTO: " + e.getMessage());
+			System.out.println("ERROR DE SETFOTO: " + e.toString());
 		}
 	}
 	

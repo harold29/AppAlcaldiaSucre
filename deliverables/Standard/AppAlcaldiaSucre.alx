@@ -1,0 +1,31 @@
+<loader version="1.0">
+	<application id="AppAlcaldiaSucre">
+		<name >
+			AppAlcaldiaSucre
+		</name>
+		<description >
+			
+		</description>
+		<version >
+			0.0.4
+		</version>
+		<vendor >
+			Mobile Media Networks
+		</vendor>
+		<copyright >
+			Copyright (c) 2013 Mobile Media Networks
+		</copyright>
+		<fileset Java="1.55" _blackberryVersion="[5.0.0)">
+			<directory >
+				5.0.0
+			</directory>
+			<files >
+				AppAlcaldiaSucre.cod
+
+			</files>
+
+		</fileset>
+
+	</application>
+
+</loader>

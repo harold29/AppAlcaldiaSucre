@@ -2,17 +2,16 @@ package com.mobilemedia.AppAlcaldiaSucre.componentes;
 
 import javax.microedition.lcdui.Font;
 
-import com.mobilemedia.AppAlcaldiaSucre.componentes.ListStyleButtonField.MyLabelField;
 
 import net.rim.device.api.system.Display;
-import net.rim.device.api.ui.DrawStyle;
 import net.rim.device.api.ui.Graphics;
-import net.rim.device.api.ui.Touchscreen;
+import net.rim.device.api.ui.XYEdges;
 import net.rim.device.api.ui.component.BasicEditField;
-import net.rim.device.api.ui.component.EditField;
 import net.rim.device.api.ui.container.VerticalFieldManager;
+import net.rim.device.api.ui.decor.BackgroundFactory;
+import net.rim.device.api.ui.decor.BorderFactory;
 
-public class EditFieldDenuncias extends EditField 
+public class EditFieldDenuncias extends BasicEditField
 {
 	public static int DRAWPOSITION_TOP = 0;
     public static int DRAWPOSITION_BOTTOM = 1;
@@ -21,10 +20,9 @@ public class EditFieldDenuncias extends EditField
     
     protected static final int HPADDING = Display.getWidth() <= 320 ? 6 : 8;
     protected static final int VPADDING = 4;
-    
-    protected MyLabelField _labelField;
-    
+        
     protected VerticalFieldManager _verticalField;
+    protected LabelFieldCustomColor _labelField;
 	
 	protected static int WIDTH = 100;
 	protected static int HEIGHT = 10;
@@ -36,7 +34,6 @@ public class EditFieldDenuncias extends EditField
     protected int _rightOffset;
     protected int _leftOffset;
     protected int _labelHeight;
-    
     protected int _drawPosition = -1;
 	
 	/*public EditFieldDenuncias(long style) {
@@ -47,17 +44,20 @@ public class EditFieldDenuncias extends EditField
 		this(label,initVal);
 	}*/
 	
-	public EditFieldDenuncias(String label, String initVal, int maxChar, long Style, int width, int height) {
-		super(label, initVal, maxChar, Style);
-		WIDTH = width;
-		HEIGHT = height;
+	public EditFieldDenuncias(long style, int numChars, String text) {
+		super("", null, numChars, style);
+		_verticalField = new VerticalFieldManager(style);
+		_labelField = new LabelFieldCustomColor(text, USE_ALL_WIDTH, 0, getFont());
+		
+		setBorder(BorderFactory.createSimpleBorder(new XYEdges(1,1,1,1)));
+		setBackground(BackgroundFactory.createSolidBackground(0xF1F1F1));		
 	}
 	
-	public EditFieldDenuncias(long style, int _color, int width, int height) {
-		super(style);
-		WIDTH = width;
-		HEIGHT = height;
-		COLOR_BACKGROUND = _color;
+	public VerticalFieldManager getVFM() {
+		_verticalField.add(_labelField);
+		_verticalField.add(this);
+		
+		return _verticalField;
 	}
 	
 	
@@ -104,12 +104,6 @@ public class EditFieldDenuncias extends EditField
 			g.setColor(background);
 		}
 	}
-	
-	public void setText (String text) {
-		_labelField.setText(text);
-	}
-	
-	
 	
 	
 }

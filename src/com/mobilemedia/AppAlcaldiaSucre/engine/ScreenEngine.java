@@ -5,8 +5,6 @@ import net.rim.device.api.ui.TransitionContext;
 import net.rim.device.api.ui.Ui;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.UiEngineInstance;
-import net.rim.device.api.ui.container.MainScreen;
-
 import com.mobilemedia.AppAlcaldiaSucre.screens.*;
 import com.mobilemedia.AppAlcaldiaSucre.objetos.*;
 
@@ -56,7 +54,7 @@ public class ScreenEngine
     
     public void goDenuncias() 
     {
-     	DenunciasScreen screen = DenunciasScreen.getInstance();
+     	DenunciaScreen screen = DenunciaScreen.getInstance();
     	 app.pushScreen(screen);
     }
     

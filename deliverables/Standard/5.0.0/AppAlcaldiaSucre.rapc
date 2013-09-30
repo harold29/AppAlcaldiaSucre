@@ -1,0 +1,10 @@
+MIDlet-Name: AppAlcaldiaSucre
+MIDlet-Version: 0.0.4
+MIDlet-Vendor: Mobile Media Networks
+MIDlet-Jar-URL: AppAlcaldiaSucre.jar
+MIDlet-Jar-Size: 0
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-1: AppAlcaldiaSucre,img/icon.png,
+RIM-MIDlet-Flags-1: 0
+
