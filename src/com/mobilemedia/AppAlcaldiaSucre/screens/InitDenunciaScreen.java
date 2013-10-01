@@ -29,6 +29,18 @@ public class InitDenunciaScreen extends MainScreen implements FieldChangeListene
 		
 	}
 	
+	/*private static class RegisterMenuItem extends MenuItem {
+		
+		public RegisterMenuItem() {
+			//super(PersistentStorage)
+		}
+
+		public void run() {
+			// TODO Auto-generated method stub
+			
+		}
+	}*/
+	
 	public void fieldChanged(Field field, int context) {
 		if (field == listStyleButtonFieldDenuncias) {}
 		if (field == listStyleButtonFIeldRegistro) {}
